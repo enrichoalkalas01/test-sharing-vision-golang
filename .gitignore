@@ -74,5 +74,3 @@ __debug_bin
 # Docker volumes
 docker-volumes/
 data/
-
-.env
