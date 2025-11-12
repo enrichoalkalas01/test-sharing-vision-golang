@@ -6,21 +6,27 @@ import (
 	"github.com/spf13/viper"
 )
 
-func NewViper(filename, filetype string, path ...string) (*viper.Viper, error) {
+func NewViper(filename, filetype string, paths ...string) (*viper.Viper, error) {
 	config := viper.New()
 
-	config.SetConfigFile(filename)
+	// Bind env variables
+	config.AutomaticEnv()
+
+	// Try to load config from file
+	config.SetConfigName(filename)
 	config.SetConfigType(filetype)
 
-	for _, p := range path {
+	for _, p := range paths {
 		config.AddConfigPath(p)
 	}
 
-	config.AutomaticEnv()
-
 	if err := config.ReadInConfig(); err != nil {
-		return nil, fmt.Errorf("error reading config viper file : %w", err)
+		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
+			return nil, fmt.Errorf("error reading config viper file: %w", err)
+		}
 	}
 
 	return config, nil
 }
+
+// docker run -d --name sharing-vision-golang -e APP_NAME=TestApp -e APP_ENV=production -e LOG_LEVEL=info -p 8004:3000 golang-sharing-vision:latest

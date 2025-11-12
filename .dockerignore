@@ -1,0 +1,68 @@
+# Git files
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+tmp/
+
+# Test files
+*.test
+*.out
+coverage.txt
+coverage.html
+*.coverprofile
+
+# Documentation
+*.md
+!README.md
+
+# Docker files (don't copy into image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.bak
+
+# Dependencies (will be downloaded during build)
+vendor/
+
+# Air config
+.air.toml
+
+# Other
+docker-volumes/
+data/
