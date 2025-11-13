@@ -53,7 +53,7 @@ func (r *articleRepository) GetList(ctx context.Context, articleFilter *dto.Arti
 	}
 
 	if articleFilter.GetSearch() != "" {
-		query = query.Where("title LIKE ?", "%"+articleFilter.Search)
+		query = query.Where("title LIKE ?", "%"+articleFilter.Search+"%")
 	}
 
 	// Get total count data
