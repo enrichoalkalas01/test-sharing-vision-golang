@@ -95,6 +95,22 @@ func (h *ArticleHandler) GetList(ctx *fiber.Ctx) error {
 		return ctx.Status(fiber.StatusBadRequest).JSON(errResponse)
 	}
 
+	category := ctx.Query("category")
+	status := ctx.Query("status")
+
+	if category != "" {
+		articleFilter.Filters.Category = category
+	}
+
+	if status != "" {
+		articleFilter.Filters.Status = status
+	}
+
+	h.log.Info("Parsed filter values",
+		zap.String("category", articleFilter.GetCategory()),
+		zap.String("status", articleFilter.GetStatus()),
+	)
+
 	// Validate filter
 	if err := articleFilter.Validate(); err != nil {
 		h.log.Warn("validation error on filter", zap.Error(err))
