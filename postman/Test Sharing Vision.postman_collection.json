@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "31f1eae9-fbbb-4dd3-8124-cb03358d8896",
+		"name": "Test Sharing Vision",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13518879"
+	},
+	"item": [
+		{
+			"name": "Get List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/v1/article?page=1&limit=10&status=Thrash",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"article"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "category",
+							"value": "Technology",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "t",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Thrash"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/article",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"article"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 12 Nov 2025 02:58:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "561"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "37b28967-bb4b-43ab-ab93-9ff4fd1def15"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Articles retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"title\": \"Test article 2\",\n            \"category\": \"Technology\",\n            \"status\": \"Publish\",\n            \"created_date\": \"2025-11-12T09:56:05+07:00\",\n            \"updated_at\": \"2025-11-12T09:56:05+07:00\"\n        },\n        {\n            \"id\": 1,\n            \"title\": \"Test article\",\n            \"category\": \"Technology\",\n            \"status\": \"Publish\",\n            \"created_date\": \"2025-11-12T09:55:50+07:00\",\n            \"updated_at\": \"2025-11-12T09:55:50+07:00\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2,\n        \"total_pages\": 1,\n        \"has_next\": false,\n        \"has_prev\": false\n    },\n    \"timestamp\": \"2025-11-12T09:58:37.7485183+07:00\",\n    \"path\": \"/api/v1/article\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Detail By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/v1/article/:article_id",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"article",
+						":article_id"
+					],
+					"variable": [
+						{
+							"key": "article_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/article/:article_id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"article",
+								":article_id"
+							],
+							"variable": [
+								{
+									"key": "article_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 12 Nov 2025 02:59:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "360"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "f5dfd980-4213-49e9-80c7-90de7a3b7cdf"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Article retrieved successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Test article\",\n        \"content\": \"This is a comprehensive guide to article...\",\n        \"category\": \"Technology\",\n        \"status\": \"Publish\",\n        \"created_date\": \"2025-11-12T09:55:50+07:00\",\n        \"updated_at\": \"2025-11-12T09:55:50+07:00\"\n    },\n    \"timestamp\": \"2025-11-12T09:59:16.6861111+07:00\",\n    \"path\": \"/api/v1/article/1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Test article 3\",\n    \"content\": \"This is a comprehensive guide to article...\",\n    \"category\": \"Technology\",\n    \"status\": \"Publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/v1/article",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"article"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Test article 3\",\n    \"content\": \"This is a comprehensive guide to article...\",\n    \"category\": \"Technology\",\n    \"status\": \"Publish\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/article",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"article"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 12 Nov 2025 03:00:23 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "374"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "6d684d2f-bfb4-4024-a7b8-bc2826bfb0ec"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Article created successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"title\": \"Test article 3\",\n        \"content\": \"This is a comprehensive guide to article...\",\n        \"category\": \"Technology\",\n        \"status\": \"Publish\",\n        \"created_date\": \"2025-11-12T10:00:24.5543956+07:00\",\n        \"updated_at\": \"2025-11-12T10:00:24.5543956+07:00\"\n    },\n    \"timestamp\": \"2025-11-12T10:00:24.6516005+07:00\",\n    \"path\": \"/api/v1/article\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update By ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Test article\",\n    \"content\": \"This is a comprehensive guide to article...\",\n    \"category\": \"Technology\",\n    \"status\": \"Publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/v1/article/1",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/v1/article/:article_id",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"article",
+						":article_id"
+					],
+					"variable": [
+						{
+							"key": "article_id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": ""
+		}
+	]
+}
