@@ -1,0 +1,6 @@
+apiVersion: v2
+name: helm-chart-recommended
+description: Helm chart gabungan - simple tapi lengkap (RECOMMENDED)
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
