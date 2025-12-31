@@ -49,7 +49,7 @@ ingress:
 
 # Health Check / Probes
 probe:
-    enabled: true
+    enabled: false
     liveness:
         path: /health # pastikan endpoint ini ada di app
         port: 8855
