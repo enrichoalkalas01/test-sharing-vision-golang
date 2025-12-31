@@ -43,7 +43,7 @@ ingress:
     hosts:
         - host: "" # kosong untuk wildcard, atau isi domain
           paths:
-              - path: /api/golang
+              - path: /api/golang-test
                 pathType: Prefix
     tls: []
 
