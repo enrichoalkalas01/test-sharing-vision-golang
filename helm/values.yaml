@@ -75,14 +75,34 @@ autoscaling:
     targetMemoryUtilizationPercentage: 80
 
 # Environment Variables
-env: []
-# - name: ENVIRONMENT
-#   value: "production"
-# - name: DATABASE_URL
-#   valueFrom:
-#     secretKeyRef:
-#       name: db-secret
-#       key: url
+# env: []
+env:
+    - name: ENVIRONMENT
+      value: "production"
+    - name: APP_NAME
+      value: sharing-vision-golang
+    - name: APP_ENV
+      value: development
+    - name: APP_VERSION
+      value: 1.0.0
+
+    # Database
+    - name: MYSQL_HOST
+      value: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
+    - name: MYSQL_PORT
+      value: 4000
+    - name: MYSQL_USER
+      value: 3RQZ5aVMPSnSZok.root
+    - name: MYSQL_PASSWORD
+      value: GEkbKlryJ2KiMYxU
+    - name: MYSQL_DATABASE
+      value: sharing_vision
+    - name: MYSQL_MAX_IDLE_CONNS
+      value: 5
+    - name: MYSQL_MAX_OPEN_CONNS
+      value: 10
+    - name: MYSQL_SSL_MODE
+      value: skip-verify
 
 # Environment from ConfigMap/Secret
 envFrom: []
