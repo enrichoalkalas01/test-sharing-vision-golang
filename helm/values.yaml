@@ -25,13 +25,13 @@ nameOverride: ""
 fullnameOverride: ""
 
 # Container Configuration
-containerPort: 8080
+containerPort: 8855
 
 # Service Configuration
 service:
     type: ClusterIP # Ganti ke ClusterIP karena pakai Ingress
-    port: 8080
-    targetPort: 8080
+    port: 8855
+    targetPort: 8855
     nodePort: 30100 # hanya untuk NodePort (range: 30000-32767)
 
 # Ingress Configuration
@@ -52,10 +52,10 @@ probe:
     enabled: true
     liveness:
         path: /health # pastikan endpoint ini ada di app
-        port: 8080
+        port: 8855
     readiness:
         path: /health
-        port: 8080
+        port: 8855
 
 # Resources
 resources:
