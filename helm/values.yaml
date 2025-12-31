@@ -4,7 +4,7 @@
 # ==============================================
 
 # App Info
-appName: test-golang-sharing-vision
+appName: test-sharing-vision-golang
 namespace: others
 
 # Replicas
@@ -125,7 +125,7 @@ affinity: {}
 #   requiredDuringSchedulingIgnoredDuringExecution:
 #   - labelSelector:
 #       matchLabels:
-#         app: test-golang-sharing-vision
+#         app: test-sharing-vision-golang
 #     topologyKey: kubernetes.io/hostname
 
 # Pod Security Context
