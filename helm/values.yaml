@@ -39,11 +39,12 @@ ingress:
     enabled: true # Enable karena Anda pakai ingress nginx
     className: nginx
     annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /
+        # nginx.ingress.kubernetes.io/rewrite-target: /
+        nginx.ingress.kubernetes.io/rewrite-target: /$1
     hosts:
         - host: "" # kosong untuk wildcard, atau isi domain
           paths:
-              - path: /api/golang-test/(.*|$)
+              - path: /api/golang-test/(.*)
                 pathType: Prefix
     tls: []
 
