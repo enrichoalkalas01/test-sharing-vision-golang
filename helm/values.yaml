@@ -35,17 +35,27 @@ service:
     nodePort: 30100 # hanya untuk NodePort (range: 30000-32767)
 
 # Ingress Configuration
+# ingress:
+#     enabled: true # Enable karena Anda pakai ingress nginx
+#     className: nginx
+#     annotations:
+#         # nginx.ingress.kubernetes.io/rewrite-target: /
+#         nginx.ingress.kubernetes.io/rewrite-target: /$1
+#     hosts:
+#         - host: "" # kosong untuk wildcard, atau isi domain
+#           paths:
+#               - path: /api/golang-test/(.*)
+#                 pathType: ImplementationSpecific
 ingress:
-    enabled: true # Enable karena Anda pakai ingress nginx
+    enabled: true
     className: nginx
     annotations:
-        # nginx.ingress.kubernetes.io/rewrite-target: /
         nginx.ingress.kubernetes.io/rewrite-target: /$1
     hosts:
-        - host: "" # kosong untuk wildcard, atau isi domain
+        - host: ""
           paths:
               - path: /api/golang-test/(.*)
-                pathType: Prefix
+                pathType: ImplementationSpecific # ✅ Ganti ini
     tls: []
 
 # Health Check / Probes
