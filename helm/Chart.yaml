@@ -1,6 +1,6 @@
 apiVersion: v2
 name: helm-chart-recommended
-description: Helm chart gabungan - simple tapi lengkap (RECOMMENDED)
+description: Helm Chart Merge By 1 And 2 Option
 type: application
 version: 1.0.0
 appVersion: "1.0.0"
