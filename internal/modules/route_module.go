@@ -1,10 +1,12 @@
 package modules
 
 import (
+	"errors"
 	"time"
 
 	"github.com/enrichoalkalas01/test-sharing-vision-golang/internal/handler"
 	middleware "github.com/enrichoalkalas01/test-sharing-vision-golang/pkg/middlewares"
+	"github.com/getsentry/sentry-go"
 	sentryfiber "github.com/getsentry/sentry-go/fiber"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -102,6 +104,42 @@ func registerRoutes(app *fiber.App, articleHandler *handler.ArticleHandler, conf
 	articles.Get("/:article_id", articleHandler.GetDetailByID)
 	articles.Put("/:article_id", articleHandler.UpdateByID)
 	articles.Delete("/:article_id", articleHandler.DeleteByID)
+
+	// Sentry test routes (hanya aktif jika SENTRY_DSN diset)
+	if config.GetString("SENTRY_DSN") != "" {
+		sentryTest := apiV1.Group("/sentry-test")
+
+		// GET /api/v1/sentry-test/panic — trigger panic, Sentry capture via sentryfiber
+		sentryTest.Get("/panic", func(c *fiber.Ctx) error {
+			panic("test panic from sentry-test endpoint")
+		})
+
+		// GET /api/v1/sentry-test/error — capture error manual ke Sentry
+		sentryTest.Get("/error", func(c *fiber.Ctx) error {
+			if hub := sentryfiber.GetHubFromContext(c); hub != nil {
+				hub.CaptureException(errors.New("test error captured manually to Sentry"))
+			}
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"status":  "error",
+				"message": "Test error sent to Sentry",
+			})
+		})
+
+		// GET /api/v1/sentry-test/message — capture message manual ke Sentry
+		sentryTest.Get("/message", func(c *fiber.Ctx) error {
+			if hub := sentryfiber.GetHubFromContext(c); hub != nil {
+				hub.WithScope(func(scope *sentry.Scope) {
+					scope.SetTag("test", "true")
+					scope.SetExtra("endpoint", "/sentry-test/message")
+					hub.CaptureMessage("Test message from sentry-test endpoint")
+				})
+			}
+			return c.Status(fiber.StatusOK).JSON(fiber.Map{
+				"status":  "success",
+				"message": "Test message sent to Sentry",
+			})
+		})
+	}
 
 	log.Info("Routes configured successfully")
 }
