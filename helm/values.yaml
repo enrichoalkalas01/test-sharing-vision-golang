@@ -114,6 +114,8 @@ env:
       value: "10"
     - name: MYSQL_SSL_MODE
       value: skip-verify
+    - name: SENTRY_DSN
+      value: "https://2ebcaf7ebb7130ed62ea7db658d1131a@sentry.enrichoalkalas.my.id/13"
 
 # Environment from ConfigMap/Secret
 envFrom: []

@@ -9,6 +9,7 @@ func main() {
 	fx.New(
 		modules.LoggerModule,
 		modules.ConfigModule,
+		modules.SentryModule,
 		modules.DatabaseModule,
 		modules.ArticleModule,
 		modules.ServerModule,

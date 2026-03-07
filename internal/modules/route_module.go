@@ -5,6 +5,7 @@ import (
 
 	"github.com/enrichoalkalas01/test-sharing-vision-golang/internal/handler"
 	middleware "github.com/enrichoalkalas01/test-sharing-vision-golang/pkg/middlewares"
+	sentryfiber "github.com/getsentry/sentry-go/fiber"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	fiberlogger "github.com/gofiber/fiber/v2/middleware/logger"
@@ -18,7 +19,15 @@ var RouteModule = fx.Module("route",
 	fx.Invoke(registerRoutes),
 )
 
-func registerMiddlewares(app *fiber.App, log *zap.Logger) {
+func registerMiddlewares(app *fiber.App, log *zap.Logger, config *viper.Viper) {
+	// Sentry Middleware (harus dipasang paling awal)
+	if config.GetString("SENTRY_DSN") != "" {
+		app.Use(sentryfiber.New(sentryfiber.Options{
+			Repanic:         true,
+			WaitForDelivery: true,
+		}))
+	}
+
 	// Recovery Middleware
 	app.Use(middleware.NewRecoveryMiddleware(log))
 
